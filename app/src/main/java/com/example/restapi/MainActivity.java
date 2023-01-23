@@ -3,6 +3,7 @@ package com.example.restapi;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 
 import android.os.AsyncTask;
 import android.os.Bundle;
@@ -42,6 +43,8 @@ public class MainActivity extends AppCompatActivity {
     private List<Person> people = new ArrayList<>();
     private String url = "https://retoolapi.dev/WRX5kT/people";
 
+    private SwipeRefreshLayout swipeRefreshLayout;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -78,6 +81,15 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 emberModositas();
+            }
+        });
+
+        swipeRefreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
+            @Override
+            public void onRefresh() {
+                RequestTask task = new RequestTask(url, "GET");
+                task.execute();
+                swipeRefreshLayout.setRefreshing(false);//EZ FONTOS ITT
             }
         });
     }
@@ -152,6 +164,8 @@ public class MainActivity extends AppCompatActivity {
 
         listViewAdatok = findViewById(R.id.listViewAdatok);
         listViewAdatok.setAdapter(new PersonAdapter());
+
+        swipeRefreshLayout = findViewById(R.id.refreshLayout);
     }
 
     private class PersonAdapter extends ArrayAdapter<Person> {

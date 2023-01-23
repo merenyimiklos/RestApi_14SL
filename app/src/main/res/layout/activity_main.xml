@@ -8,15 +8,15 @@
     tools:context=".MainActivity">
 
     <ProgressBar
+        android:id="@+id/progressBar"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:visibility="gone"
-        android:id="@+id/progressBar"/>
+        android:visibility="gone" />
 
     <LinearLayout
+        android:id="@+id/linearLayoutPersonForm"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:id="@+id/linearLayoutPersonForm"
         android:orientation="vertical">
 
         <EditText
@@ -24,7 +24,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:hint="ID"
-            android:visibility="gone"/>
+            android:visibility="gone" />
 
         <EditText
             android:id="@+id/editTextName"
@@ -73,10 +73,16 @@
         android:layout_height="wrap_content"
         android:text="Új hozzáadás" />
 
-    <ListView
+    <androidx.swiperefreshlayout.widget.SwipeRefreshLayout
+        android:id="@+id/refreshLayout"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:id="@+id/listViewAdatok"
-        tools:listitem="@layout/person_list_items"/>
+        android:layout_height="match_parent">
+
+        <ListView
+            android:id="@+id/listViewAdatok"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            tools:listitem="@layout/person_list_items" />
+    </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
 
 </LinearLayout>
